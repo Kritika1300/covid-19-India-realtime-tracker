@@ -10,6 +10,7 @@ exe and the Pictuers folder!
 Also you need an Internet connection so that the app can load the data :)
 I am attaching some screenshots down below :)
 
+<b> Icons courtesy : https://www.flaticon.com/ </b>
 <h2>Stay Home, Stay Safe!</h2>
 
 <h3>Images:</h3>
