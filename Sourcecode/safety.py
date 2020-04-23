@@ -3,7 +3,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_SafteyWindow(object):
     def setupUi(self, SafteyWindow):
-        QtGui.QFontDatabase.addApplicationFont("Data/BankGothic Md BT.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Pictures/BankGothic Md BT.ttf")
         SafteyWindow.setObjectName("SafteyWindow")
         SafteyWindow.resize(768, 913)
         SafteyWindow.setFixedSize(SafteyWindow.size())

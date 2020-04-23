@@ -7,26 +7,21 @@ import pandas as pd
 import csv
 from datetime import date
 from datetime import datetime
-raw_data = pd.read_csv("Data/Patient Number.csv")
-dec_rec = pd.read_csv("Data/Sl_No.csv")
-statewise=pd.read_csv("Data/State.csv")
-statedaily=pd.read_csv("Data/Date.csv")
+
+statewise=pd.read_csv("https://api.covid19india.org/csv/latest/state_wise.csv")
+statedaily=pd.read_csv("https://api.covid19india.org/csv/latest/state_wise_daily.csv")
 stateDict={"Total":"TT","Andhra Pradesh":"AP","Arunachal Pradesh":"AR","Assam":"AS","Bihar":"BR","Chhattisgarh":"CT","Goa":"GA","Gujarat":"GJ","Haryana":"HR","Himachal Pradesh":"HP","Jharkhand":"JH",
 "Karnataka":"KA","Kerala":"KL","Madhya Pradesh":"MP","Maharashtra":"MH","Manipur":"MN","Meghalaya":"ML","Mizoram":"MZ","Nagaland":"NL","Odisha":"OR","Punjab":"PB","Rajasthan":"RJ","Sikkim":"SK",
 "Tamil Nadu":"TN","Telangana":"TG","Tripura":"TR","Uttarakhand":"UT","Uttar Pradesh":"UP","West Bengal":"WB","Andaman and Nicobar Islands":"AN","Chandigarh":"CH","Dadra and Nagar Haveli":"DN",
 "Daman and Diu":"DD","Delhi":"DL","Jammu and Kashmir":"JK","Ladakh":"LA","Lakshadweep":"LD","Puducherry":"PY"}
 StateList=list(statewise['State'].dropna())
-raw_data=raw_data.dropna(subset=raw_data.columns[[7]], how='any')
-total=len(raw_data)
-recovered=len(dec_rec[dec_rec['Patient_Status']=="Recovered"])
-deceased=len(dec_rec[dec_rec['Patient_Status']=="Deceased"])
-active=total-recovered-deceased
+
 class TimeAxisItem(pg.AxisItem):
     def tickStrings(self, values, scale, spacing):
         return [datetime.fromtimestamp(value) for value in values]
 class Ui_StateWise(object):
     def setupUi(self, StateWise):
-        QtGui.QFontDatabase.addApplicationFont("Data/BankGothic Md BT.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Pictures/BankGothic Md BT.ttf")
         StateWise.setObjectName("StateWise")
         StateWise.resize(546, 539)
         StateWise.setFixedSize(StateWise.size())

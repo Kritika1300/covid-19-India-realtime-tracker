@@ -1,7 +1,4 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from bs4 import BeautifulSoup
-import csv
-import requests
 import pandas as pd
 from datetime import date
 from datetime import datetime
@@ -9,34 +6,17 @@ from datetime import datetime
 from safety import Ui_SafteyWindow
 from recreation import Ui_rec
 from PyQt5 import *
-print("start")
-html = requests.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vSz8Qs1gE_IYpzlkFkCXGcL_BqR8hZieWVi-rphN1gfrO3H4lDtVZs4kd0C3P8Y9lhsT1rhoB-Q_cP4/pubhtml').text
-soup = BeautifulSoup(html, "lxml")
-tables = soup.find_all("table")
-index = 0
-print("Success")
-for table in tables:
-    a=table.find('td')
-    a=a.text
-    if(a=="Patient Number" or a=="Sl_No" or a=="Date" or a=="State"):
-     with open("Data/"+a+ ".csv", mode='w',encoding='utf8') as f:
-        wr = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC,lineterminator='\n')
-        wr.writerows([[td.text for td in row.find_all("td")] for row in table.find_all("tr") ])
-     index = index + 1
 from swui import Ui_StateWise     
-raw_data = pd.read_csv("Data/Patient Number.csv")
-dec_rec = pd.read_csv("Data/Sl_No.csv")
-statewise=pd.read_csv("Data/State.csv")
+statewise=pd.read_csv("https://api.covid19india.org/csv/latest/state_wise.csv")
 lastupdated=statewise['Last_Updated_Time'][0].split(' ')
 timeob=datetime.strptime(lastupdated[1],"%H:%M:%S")
 lastupdated=datetime.strptime(lastupdated[0],"%d/%m/%Y")
-raw_data=raw_data.dropna(subset=raw_data.columns[[7]], how='any')
-print("Active",str(timeob))
-total=len(raw_data)
-recovered=len(dec_rec[dec_rec['Patient_Status']=="Recovered"])
-deceased=len(dec_rec[dec_rec['Patient_Status']=="Deceased"])
-active=total-recovered-deceased
-print(total,recovered,deceased)
+print("Active")
+state=statewise.loc[statewise['State']=='Total']
+total=int(state['Confirmed'])
+recovered=int(state['Recovered'])
+deceased=int(state['Deaths'])
+active=int(state['Active'])
 class Ui_MainWindow(object):
     def OpenStateWise(self):
         self.window = QtWidgets.QMainWindow()
@@ -58,7 +38,7 @@ class Ui_MainWindow(object):
         #MainWindow.hide()    
         
     def setupUi(self, MainWindow):
-        QtGui.QFontDatabase.addApplicationFont("Data/BankGothic Md BT.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Pictures/BankGothic Md BT.ttf")
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(558, 639)
         MainWindow.setFixedSize(MainWindow.size())

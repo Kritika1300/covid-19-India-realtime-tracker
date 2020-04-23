@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_rec(object):
     def setupUi(self, rec):
-        QtGui.QFontDatabase.addApplicationFont("Data/BankGothic Md BT.ttf")
+        QtGui.QFontDatabase.addApplicationFont("Pictures/BankGothic Md BT.ttf")
         rec.setObjectName("rec")
         rec.resize(782, 600)
         rec.setFixedSize(rec.size())
