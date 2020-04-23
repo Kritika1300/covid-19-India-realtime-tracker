@@ -1,6 +1,7 @@
-#Covid-19 India Dashboard(Desktop App)
+<h1>Covid-19 India Dashboard(Desktop App)</h1>
 
-This app has been built using Python and Its GUI has been designed using PyQt5. The Earlier version of this app depended upon 
+This app has been built using Python and Its GUI has been designed using PyQt5.
+The Earlier version of this app depended upon 
 web scrapping for its database. But now the app has been updated to work using APIs provided by https://www.covid19india.org/ so a huge shoutout to them!
 Everytime you load the app , it fetches the latest dataset regarding the covid-19 cases in all the Indian states/U.T.s using the apis and provides an interactive UI for the user. 
 Graphical Analysis is possible. You can zoom in the graphs for detailed Information and trends and to check date-wise cases.
@@ -9,9 +10,9 @@ exe and the Pictuers folder!
 Also you need an Internet connection so that the app can load the data :)
 I am attaching some screenshots down below :)
 
-##Stay Home, Stay Safe!
+<h2>Stay Home, Stay Safe!</h2>
 
-Images:
+<h3>Images:</h3>
 
 ![homepage](https://user-images.githubusercontent.com/53215737/80097534-16ef0b80-8589-11ea-9e27-c36208a8fce2.png) 
 
