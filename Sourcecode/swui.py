@@ -13,15 +13,20 @@ statedaily=pd.read_csv("https://api.covid19india.org/csv/latest/state_wise_daily
 stateDict={"Total":"TT","Andhra Pradesh":"AP","Arunachal Pradesh":"AR","Assam":"AS","Bihar":"BR","Chhattisgarh":"CT","Goa":"GA","Gujarat":"GJ","Haryana":"HR","Himachal Pradesh":"HP","Jharkhand":"JH",
 "Karnataka":"KA","Kerala":"KL","Madhya Pradesh":"MP","Maharashtra":"MH","Manipur":"MN","Meghalaya":"ML","Mizoram":"MZ","Nagaland":"NL","Odisha":"OR","Punjab":"PB","Rajasthan":"RJ","Sikkim":"SK",
 "Tamil Nadu":"TN","Telangana":"TG","Tripura":"TR","Uttarakhand":"UT","Uttar Pradesh":"UP","West Bengal":"WB","Andaman and Nicobar Islands":"AN","Chandigarh":"CH","Dadra and Nagar Haveli":"DN",
-"Daman and Diu":"DD","Delhi":"DL","Jammu and Kashmir":"JK","Ladakh":"LA","Lakshadweep":"LD","Puducherry":"PY"}
+"Daman and Diu":"DD","Delhi":"DL","Jammu and Kashmir":"JK","Ladakh":"LA","Lakshadweep":"LD","Puducherry":"PY","Dadra and Nagar Haveli and Daman and Diu":"DN","State Unassigned":"UN"}
 StateList=list(statewise['State'].dropna())
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
 
 class TimeAxisItem(pg.AxisItem):
     def tickStrings(self, values, scale, spacing):
         return [datetime.fromtimestamp(value) for value in values]
 class Ui_StateWise(object):
     def setupUi(self, StateWise):
-        QtGui.QFontDatabase.addApplicationFont("Pictures/BankGothic Md BT.ttf")
+        QtGui.QFontDatabase.addApplicationFont(resource_path("Pictures/BankGothic Md BT.ttf"))
         StateWise.setObjectName("StateWise")
         StateWise.resize(546, 539)
         StateWise.setFixedSize(StateWise.size())
@@ -174,7 +179,7 @@ from pyqtgraph import PlotWidget
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    app.setWindowIcon(QtGui.QIcon('Pictures/virus.ico'))
+    app.setWindowIcon(QtGui.QIcon(resource_path('Pictures/virus.ico')))
     StateWise = QtWidgets.QMainWindow()
     ui = Ui_StateWise()
     ui.setupUi(StateWise)
